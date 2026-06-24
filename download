@@ -1,0 +1,70 @@
+# PDC Barbería — Sistema
+
+App de gestión para PDC Barbería: turnos, cortes, membresías, caja, comisiones y PDC Score.
+
+> ⚠️ **Importante (etapa de prueba):** Esta versión guarda los datos en el navegador de cada dispositivo (no se comparten entre teléfonos). Sirve para probar la interfaz. Para que todos compartan los mismos datos hace falta el paso siguiente (base de datos / Supabase).
+
+---
+
+## Claves de acceso
+
+- **Administración:** clave `pdc`
+- **Agustín Saragoza:** `1111`
+- **Kevin Asinari:** `2222`
+- **Tobias Villafañe:** `3333`
+
+(Se cambian en `src/App.jsx`, arriba de todo, en la constante `USUARIOS`.)
+
+---
+
+## Cómo subirla gratis (la forma más fácil: Vercel)
+
+No necesitás instalar nada en tu compu. Todo desde el navegador:
+
+### 1. Crear cuenta
+- Entrá a **https://vercel.com** y registrate gratis (podés usar tu Google o GitHub).
+
+### 2. Subir el proyecto
+**Opción rápida (arrastrar):**
+1. En Vercel, tocá **Add New… → Project**.
+2. Elegí **Deploy** y arrastrá esta carpeta completa (la que contiene `package.json`).
+   - Si te pide configuración, dejá todo por defecto: Vercel detecta Vite solo.
+3. Esperá ~1 minuto. Te va a dar un link tipo `https://pdc-barberia.vercel.app`.
+
+**Opción con GitHub (recomendada para actualizar fácil):**
+1. Subí esta carpeta a un repositorio en GitHub.
+2. En Vercel: **Add New… → Project → Import** ese repo.
+3. Dejá la configuración por defecto y **Deploy**.
+4. Cada vez que cambies algo en GitHub, Vercel actualiza la web sola.
+
+### 3. Compartir
+Pasá el link a Alejandra y a los barberos. Lo abren desde el celular y pueden
+"Agregar a pantalla de inicio" para que quede como una app.
+
+---
+
+## Alternativa: Netlify
+
+1. Entrá a **https://app.netlify.com/drop**
+2. Primero corré el build (ver abajo) y arrastrá la carpeta **`dist`** generada.
+   (O conectá el repo de GitHub igual que en Vercel.)
+
+---
+
+## Correr o compilar en tu compu (opcional)
+
+Necesitás Node.js instalado (https://nodejs.org).
+
+```bash
+npm install      # instala dependencias (una sola vez)
+npm run dev      # abre la app en desarrollo (http://localhost:5173)
+npm run build    # genera la carpeta dist/ lista para subir
+```
+
+---
+
+## Próximo paso (datos compartidos)
+
+Cuando quieras que todos vean la misma información en tiempo real (que el corte de un
+barbero aparezca en la caja de Alejandra, etc.), hay que conectar la app a **Supabase**
+(base de datos gratuita). Eso reemplaza el guardado local por uno central.
