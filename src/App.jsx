@@ -461,7 +461,7 @@ useEffect(() => {
       {
         nombre: n,
         telefono: tel,
-        barbero: sesion?.usuario || ""
+        barbero: barberoActivo || ""
       }
     ];
   });
