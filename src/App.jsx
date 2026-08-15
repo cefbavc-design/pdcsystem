@@ -432,7 +432,7 @@ useEffect(() => {
     if (!form.monto || isNaN(Number(form.monto)) || Number(form.monto) <= 0) e.monto = true;
     return e;
   }
-  function guardarCliente(nombre, telefono) {
+ function guardarCliente(nombre, telefono) {
   const n = (nombre || "").trim();
   if (!n) return;
 
@@ -444,8 +444,6 @@ useEffect(() => {
     );
 
     if (idx >= 0) {
-      // Si ya existe, actualizar teléfono si llegó uno nuevo
-      // y conservar el barbero que ya tenía.
       if (tel && !prev[idx].telefono) {
         const cp = [...prev];
         cp[idx] = {
@@ -458,19 +456,16 @@ useEffect(() => {
       return prev;
     }
 
-    // Cliente nuevo:
-    // queda asignado al barbero que está cargándolo.
     return [
       ...prev,
       {
         nombre: n,
         telefono: tel,
-        barbero: sesion?.nombre || ""
+        barbero: sesion?.usuario || ""
       }
     ];
   });
 }
-  }
   // ¿Existe ficha guardada para este nombre?
   function existeCliente(nombre) {
     const n = (nombre||"").trim().toLowerCase();
