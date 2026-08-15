@@ -433,17 +433,43 @@ useEffect(() => {
     return e;
   }
   function guardarCliente(nombre, telefono) {
-    const n = (nombre||"").trim(); if (!n) return;
-    const tel = (telefono||"").trim();
-    setClientes(prev => {
-      const idx = prev.findIndex(c => c.nombre.toLowerCase() === n.toLowerCase());
-      if (idx >= 0) {
-        // actualizar teléfono si vino uno nuevo y no había
-        if (tel && !prev[idx].telefono) { const cp=[...prev]; cp[idx]={ ...cp[idx], telefono:tel }; return cp; }
-        return prev;
+  const n = (nombre || "").trim();
+  if (!n) return;
+
+  const tel = (telefono || "").trim();
+
+  setClientes(prev => {
+    const idx = prev.findIndex(
+      c => c.nombre.toLowerCase() === n.toLowerCase()
+    );
+
+    if (idx >= 0) {
+      // Si ya existe, actualizar teléfono si llegó uno nuevo
+      // y conservar el barbero que ya tenía.
+      if (tel && !prev[idx].telefono) {
+        const cp = [...prev];
+        cp[idx] = {
+          ...cp[idx],
+          telefono: tel
+        };
+        return cp;
       }
-      return [...prev, { nombre: n, telefono: tel }];
-    });
+
+      return prev;
+    }
+
+    // Cliente nuevo:
+    // queda asignado al barbero que está cargándolo.
+    return [
+      ...prev,
+      {
+        nombre: n,
+        telefono: tel,
+        barbero: sesion?.nombre || ""
+      }
+    ];
+  });
+}
   }
   // ¿Existe ficha guardada para este nombre?
   function existeCliente(nombre) {
